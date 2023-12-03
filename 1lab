@@ -1,0 +1,56 @@
+#include <math.h>
+#include <stdio.h>
+
+double fc(double x){
+double r=1;
+for(int q=1;q<=x;q=q+1){
+r=r*q;
+}
+return r;
+}
+
+double T(double x, double a){
+double res=0,b=1000000;
+int i=0;
+while (a<b){
+b=pow(x,i)*(i+1)/fc(i);
+res=res+b;
+i=i+1;
+}
+return res; 
+}
+
+double N(double x,int n){
+double res1=0;
+for(int j=0;j<n;j=j+1){
+res1=res1+(pow(x,j)*(j+1)/fc(j));
+}
+return res1;
+}
+
+int main(void){
+int t,n1;
+double x1,a1;
+printf("Введите x:");
+scanf("%lf",&x1);
+if ((fabs(x1))<2.4){
+printf("Выберите способ вычисления:\n1)С указанной точностью\n2)Для указанного кол-ва членов\n");
+scanf("%d",&t);
+switch(t){
+case 1:
+printf("Введите точность вычисления");
+scanf("%lf",&a1);
+printf("%lf",T(x1,a1));
+break;
+case 2:
+printf("Введите количество членов");
+scanf("%d",&n1);
+printf("%lf",N(x1,n1));
+break;
+default:printf("Введенный способ вычисления недоступен");
+}
+}
+else {
+		printf("Выражение не может быть вычислено для введенного x");
+	}
+}
