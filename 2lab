@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <math.h>
+
+void Array(int a[],int k){
+for (int i=0;i<k;i=i+1){
+    scanf("%d",&(a[i])); 
+}    
+}
+
+void ArrayPrint(int A[],int n){
+    printf("Исходный массив:");
+    for (int i=0;i<n;i=i+1){
+        printf("%d ",A[i]);
+    }
+    printf("\n");
+}
+
+int Task1(int arr1[],int h,int x1,int y1){
+int min=10000000;
+for (int i=0;i<h;i=i+1){
+if ((arr1[i]>=x1) && (arr1[i]<=y1) &&(fabs(arr1[i])<min)) {
+  min=arr1[i];
+} 
+}
+if (min<10000000){return min;}
+else{printf("Такие значения отсутствуют");
+}
+}
+
+double Task2(int arr2[],int j){
+int max,min;
+int sum=0;
+int count=0;
+for (int i1=0;i1<j;i1=i1+1){
+    if ((arr2[i1]%2)==0) {
+        min=i1;
+        break;
+    }
+}
+for (int i2=j-1;i2>=0;i2=i2-1){
+    if (arr2[i2]%2==0) {
+        max=i2;
+        break;
+    }
+}
+if (max<=min) {
+    printf("Среднее арифметическое не может быть подсчитано\n");
+}
+else{
+for (int i3=min+1;i3<max;i3=i3+1){
+    count=count+1;
+    sum=sum+arr2[i3];
+}
+double res=sum/count;
+return res;
+}
+}
+
+int main(void){
+    int k1,x,y;
+    printf("Введите размер массива\n");
+    scanf("%d",&k1);
+    int arr[k1];
+    printf("Введите элементы массива\n");
+    Array(arr,k1);
+    ArrayPrint(arr,k1);
+    printf("Введите пороговые значения\n");
+    scanf("%d %d",&x,&y);
+    if (x>y){printf("X должен быть меньше Y!\n");}
+    else{
+    printf("Минимальный по модулю элемент, больший или равный X и меньший или равный Y,= %d\n",Task1(arr,k1,x,y));
+    }
+    printf("Среднее арифметическое чисел между первым и последним нечетным элементом = %.2lf\n",Task2(arr,k1));
+    
+}
